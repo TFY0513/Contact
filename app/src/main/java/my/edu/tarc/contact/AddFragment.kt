@@ -5,11 +5,12 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import my.edu.tarc.contact.databinding.FragmentAddBinding
-import my.edu.tarc.contact.databinding.FragmentSecondBinding
 import my.edu.tarc.contact.model.Contact
+import my.edu.tarc.contact.viewmodel.ContactViewModel
 
 
 /**
@@ -21,6 +22,7 @@ class AddFragment : Fragment() {
     private var _binding: FragmentAddBinding? = null
 
     private val binding get() = _binding!!
+    private val contactViewModel: ContactViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +57,18 @@ class AddFragment : Fragment() {
                 val newContact = Contact(name, phone)
 
                 //Add new contact  ot the contact list
-                MainActivity.contactList.add(newContact)
+                contactViewModel.insert(newContact)
+
+                Toast.makeText(
+                    context, getString(R.string.contact_saved),
+                    Toast.LENGTH_SHORT
+                ).show()
+
+
+
                 val navController = activity?.findNavController(R.id.nav_host_fragment_content_main)
                 findNavController().navigateUp()
 
-                Toast.makeText(context, getString(R.string.contact_saved),
-                    Toast.LENGTH_SHORT).show()
                 true
             }
         }

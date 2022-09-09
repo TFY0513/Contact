@@ -2,7 +2,6 @@ package my.edu.tarc.contact
 
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,13 +9,16 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import my.edu.tarc.contact.databinding.ActivityMainBinding
 import my.edu.tarc.contact.model.Contact
+import my.edu.tarc.contact.viewmodel.ContactViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var contactViewModel: ContactViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        contactViewModel = ViewModelProvider(this).get(ContactViewModel::class.java)
 
         setSupportActionBar(binding.toolbar)
 
@@ -74,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    companion object{
-        val contactList = ArrayList<Contact>()
-    }
+//    companion object{
+//        val contactList = ArrayList<Contact>()
+//    }
 }

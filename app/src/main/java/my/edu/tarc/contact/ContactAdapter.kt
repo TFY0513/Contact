@@ -6,19 +6,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import my.edu.tarc.contact.model.Contact
-import org.w3c.dom.Text
 
-class ContactAdapter(private val contactList: List<Contact>):
-    RecyclerView.Adapter<ContactAdapter.ViewHolder>(){
+class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+    //create a local version of dataset
+    private var contactList = emptyList<Contact>()
 
+    internal fun setContact(contact: List<Contact>){
+        contactList = contact
+        notifyDataSetChanged()
+    }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         //A view object hosting each record
         val textViewName: TextView = view.findViewById(R.id.textViewName)
         val textViewPhone: TextView = view.findViewById(R.id.textViewPhone)
 
-        init{
-            view.setOnClickListener{
+        init {
+            view.setOnClickListener {
                 //TODO: handling click event
             }
         }
